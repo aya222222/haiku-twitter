@@ -1,0 +1,36 @@
+.LikeUserCard {
+    position: relative;
+    width:85%;
+    background-color: var(--cardBg);
+    border-radius: 10px;
+    padding: 20px;
+    display:flex;
+    /* flex-direction: column; */
+    gap:15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+}
+.LikeUserCard img {
+    /* position:absolute; */
+    display: inline-block;
+    height:60px;
+    width: 60px;
+    border-radius: 50%; 
+    object-fit: cover;
+    /* top:-50%; */
+     /* position: absolute;  */
+    /* left:50%; 
+    bottom: -50%; */
+    /* transform: translate(-50%, -50%); */
+}
+
+.userDetailSection {
+   display:flex;
+   flex-direction: column;
+   justify-content: space-between;
+   /* align-items: flex-start; */
+}

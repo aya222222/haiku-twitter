@@ -1,0 +1,40 @@
+.pagination {
+    display:flex;
+    justify-content: center;
+
+    gap:5px;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+    
+}
+
+
+.pagination .pageBtn {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration:none;
+    width: 40px;
+    height: 40px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    /* transition: all 0.3s ease; */
+    background: transparent;
+    /* color: #eee; */
+    color:#686464;
+    border:2px solid #d3c9c9;
+}
+
+.pagination .pageBtn:active {
+    font-weight: 900;
+    border:2px solid #837f7f;
+    background: #d3c9c9;
+   
+}
+
+

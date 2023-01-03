@@ -1,0 +1,99 @@
+.ProfileCard {
+    /* border-radius: 20px;
+    background-color:var(--cardBg);
+    overflow-x: clip; */
+}
+.profileImages {
+    /* position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    height:250px; */
+  
+}
+
+.profileBgImgSection{
+
+    height:100%;
+    width:100%;
+    border-bottom: 1px solid #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileIconImgSection {
+    /* width: 70px;
+    height:70px;
+    border-radius: 50%; 
+    position: absolute;
+    left:50%;
+    top:100%;
+    /* bottom: -50%; */
+    /* transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000000;
+    background-color: var(--cardBg);  */
+}
+
+.profileBgImgCard { 
+    /* height:100%;
+    width:100%;
+    object-fit: cover;
+    border:1px solid #000; */
+}
+
+.profileIconImgCard {
+    /* height:100%;
+    width:100%;
+    border-radius: 50%; 
+    object-fit: cover; */
+}
+
+.cameraIcon1 {
+    /* width:100px; */
+
+}
+
+.cameraIcon2 {
+    /* width:20px; */
+   
+
+}
+
+.buttonSection {
+    /* position: relative; */
+}
+
+.profileName {
+    /* margin-top: 2rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}
+
+.ProfileCard hr {
+    width: 90%;
+    border: 1px solid gray;
+    /* margin-top: 20px; */
+    margin: 20px auto;
+}
+
+.followStatus {
+    /* display:flex;
+    justify-content: center;
+    gap: 5px;
+    text-align: center; */
+}
+
+.vl {
+   
+    /* border-left: 2px solid gray; */
+   
+}
+

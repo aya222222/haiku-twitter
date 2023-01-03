@@ -1,0 +1,47 @@
+
+
+.modalInner {
+    background-color: var(--cardBg);
+    padding: 10px 15px 25px 15px;
+    width: 28%;
+    top: 50%;
+    left: 50%;
+    position: relative;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    /* height: 50%; */
+    box-shadow:  6px 6px 12px #5a5a5a,
+    -6px -6px 12px #a6a6a6;
+}
+
+.haikuSection {
+  display: flex;
+  flex-direction: column;
+  justify-content:center ;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.haikuSection textarea {
+    margin-bottom: 25px;
+}
+
+.creator { 
+    margin-right: auto;
+    width: 40%;
+}
+.haikuSection input {
+    margin-bottom: 25px;
+
+    height: 30px;
+
+}
+
+.fileBase {
+    margin-right: auto;
+}
+.haikuBtn {
+    display: flex;
+    gap: 1rem;
+}
+

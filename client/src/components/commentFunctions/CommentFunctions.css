@@ -1,0 +1,22 @@
+.commentFuncList {
+    /* position: absolute; */
+    /* display:none; */
+}
+
+ul {
+    list-style:none;
+    border:1px solid #000000;
+    padding: 10px;
+}
+
+.commentFuncs{
+    /* display:flex;
+    justify-content: flex-start;
+    gap: 12px;
+    align-items: center; */
+
+}
+
+.commentFuncs:hover {
+    color: #ffffff;
+}

@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;  /*webkit系*/
+  -moz-box-sizing: border-box;  /*Firefox*/
+
+}
+
+@layer base {
+  html {
+    font-family: 'IBM Plex Mono', monospace;
+ 
+
+  }
+}
+
+
+
+
+#root {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.App {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* background-color: #f3f3f3; */
+  /* min-height: 100vh; */
+  /* flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+  /* height: 100vh;  */
+
+  /* max-width: 500px; */
+  /* overflow: hidden; */
+  margin: auto;
+
+}
+
+/* to avoid input:-internal-autofill-selected */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+/* :root {
+  --cardBg:antiquewhite;
+  --btnBg: darkseagreen;
+  --deleteBtnBg: #ffc1cc;
+  --bodyBg: #f3f3f3;
+} */
+
+.button {
+  /* border:none;
+  padding:5px 10px;
+  border-radius: 10px;
+  outline:none;
+  width:100px;
+  font-size: 20px;
+  color: #ffffff; */
+  /* background-color: var(--btnBg); */
+  /* transition: all 0.1s ease-out;
+  cursor: pointer; */
+}
+
+.fa-solid {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  cursor: pointer;
+  color: #ffffff;
+  /* z-index:20; */
+  /* width:30px; */
+}
+
+.fa-solid:hover {
+  color: 	#D0D0D0;
+}
+
+.button
+ /* .postBtn, .editBtn, .authBtn  */
+ {
+  /* background-color: var(--btnBg); */
+}
+.deleteBtn {
+  /* background-color: var(--deleteBtnBg); */
+}
+
+
+.button:hover
+{
+  color: var(--btnBg);
+  outline: 2px solid var(--btnBg);
+  /* background-color:   #FFFEF2; */
+}
+
+.deleteBtn:hover {
+  color: var(--deleteBtnBg);
+  outline: 2px solid var(--deleteBtnBg);
+}
+
+.profileEditBtn {
+  /* border:none;
+  padding:2.5px;
+  border-radius: 5px;
+  outline:none;
+  width:50px;
+  font-size: 15px;
+  color: #ffffff;
+
+  transition: all 0.1s ease-out;
+  cursor: pointer;
+  position:absolute; 
+  right:10px;
+  top:5px; */
+  }
+
+.Modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(93,91,91, 0.5);
+}
+
+.deleteAlertModalInner {
+  /* background-color: #f3f3f3; */
+  /* padding: 10px 15px 25px 15px;
+  width: 25%;
+  top: 50%;
+  left: 50%;
+  position: relative;
+  transform: translate(-50%, -50%);
+  border-radius: 5px; */
+  /* height: 50%; */
+  /* box-shadow:  6px 6px 12px #5a5a5a,
+  -6px -6px 12px #a6a6a6; */
+}
+
+/* .deleteAlertModalSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:1rem;
+} */
+
+/* .alertBtnSection {
+  display: flex;
+  gap:10px;
+} */
+
+.textInput {
+  /* width: 100%;
+  padding:10px;
+
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color:#F8F8F8; */
+}
+
+.textInput:focus {
+  /* background-color: #ffffff; */
+}
+
+/* .alertBtn {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+   */
+
+   .smallText{
+    /* font-size: 10px; */
+   }

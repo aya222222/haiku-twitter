@@ -1,0 +1,85 @@
+.CreatorProfileCard {
+    border-radius: 20px;
+    background-color:var(--cardBg);
+    overflow-x: clip;
+    width: 100%;
+}
+.creatorProfileImages {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    height:200px;
+  
+}
+
+.creatorProfileImages > img:nth-child(1) { 
+ height:100%;
+ width:100%;
+ object-fit: cover;
+}
+
+.creatorProfileImages > img:nth-child(2) {
+    width: 70px;
+    height:70px;
+    border-radius: 50%; 
+    object-fit: cover;
+    position: absolute;
+    left:50%;
+    top:100%;
+    /* bottom: -50%; */
+    transform: translate(-50%, -50%);
+
+}
+
+
+
+
+.creatorProfileName {
+    margin: 2rem 0;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProfileCard hr {
+    width: 90%;
+    border: 1px solid gray;
+    /* margin-top: 20px; */
+    margin: 20px auto;
+}
+
+.creatorFollowStatus {
+    margin: 0 40px 10px 0;
+    display:flex;
+    justify-content: flex-end;
+    gap: 20px;
+    text-align: center;
+}
+
+/* .vl {
+   
+    border-left: 2px solid gray;
+   
+} */
+.creatorFollowNumber {
+    gap: 2rem
+}
+.creatorFollowNumber p {
+    font-size: 15px;
+}
+
+.creatorFollowBtnSection {
+    position:relative; 
+    /* right:60px;
+    top:5px; */
+}
+
+.creatorFollowBtnSection button {
+    position: absolute;
+    right:20px;
+    top:5px;
+}

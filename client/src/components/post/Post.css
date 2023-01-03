@@ -1,0 +1,140 @@
+.Post {
+    /* width:85%;
+
+    border-radius: 10px;
+    padding: 20px;
+    display:flex;
+    flex-direction: column;
+    gap:15px; */
+}
+
+.creatorName {
+    /* width:fit-content;
+    cursor: pointer; */
+}
+
+.haiku {
+    /* background-color: honeydew; */
+    padding:25px 10px;
+    border-radius: 5px;
+    display:flex;
+    flex-direction: column;
+    gap:1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.createdTimeSection {
+    /* margin-left: auto; */
+}
+
+.editedTime { 
+    /* to adjust space between 'edited' */
+    /* margin-bottom:-10px; */
+
+
+}
+
+.edited {
+    font-size: 10px;
+  
+    float: right;
+}
+
+.haiku img {
+    max-width: 100%;
+    object-fit: cover;
+}
+.reaction {
+    display: flex;
+    justify-content: space-between;
+    width:20%;
+}
+
+.reactionLikes, .reactionComments {
+    /* text-align: center; */
+}
+
+.reaction p
+/* :nth-child(3), 
+.reactionComments  p:nth-child(3) */
+{
+    font-size:12px
+}
+
+.likeLength {
+    /* cursor: pointer; */
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.heart .speech {
+   
+}
+
+.reactionIcon {
+    /* color: black;
+    opacity: 0.4;
+    cursor: pointer;
+    width: 30px;
+    height: 30px; */
+}
+
+.heart.clickLike:hover {
+    animation: heartbeat 1s infinite;
+    fill: pink;
+    color: pink;
+    opacity: 1;
+    transition: opacity 500ms; 
+
+}
+
+.like {
+    /* fill: pink;
+    color: pink;
+    opacity: 1; */
+}
+
+.clickLike {
+    /* fill: #FF69B4;
+    color: #FF69B4;
+    opacity: 1; */
+}
+
+.haikuBtn {
+    /* display:flex;
+    justify-content: center; */
+}
+
+.creatorInfo {
+    /* display: flex;
+    align-items: center;
+    gap:1rem;
+    width: fit-content;
+    cursor: pointer; */
+}
+.creatorIconImg {
+    /* position:absolute; */
+    /* display: inline-block;
+    height:60px;
+    width: 60px;
+    border-radius: 50%; 
+    object-fit: cover; */
+    /* top:-50%; */
+     /* position: absolute;  */
+    /* left:50%; 
+    bottom: -50%; */
+    /* transform: translate(-50%, -50%); */
+}

@@ -1,0 +1,26 @@
+export const CREATE ='CREATE';
+export const  UPDATE = 'UPDATE';
+export const DELETE = 'DELETE';
+export const FETCH_ALL = 'FETCH_ALL';
+export const FETCH_BY_SEARCH = 'FETCH_BY_SEARCH';
+export const GET_POST = 'GET_POST';
+export const GET_USER_POSTS = 'ET_USER_POSTS';
+export const GET_LIKE_LIST = 'GET_LIKE_LIST';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const START_LOADING = 'START_LOADING';
+export const END_LOADING = 'END_LOADING';
+
+export const AUTH = 'AUTH';
+export const LOGOUT = 'LOGOUT';
+
+export const GET_PROFILE = 'GET_PROFILE';
+export const CREATE_PROFILE =  'CREATE_PROFILE';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const GET_CREATOR_PROFILE = 'GET_CREATOR_PROFILE';
+export const FOLLOW_OR_UNFOLLOW = 'FOLLOW_OR_UNFOLLOW';
+export const UPDATE_CREATORS_FOLLOW_STATUS = ' UPDATE_CREATORS_FOLLOW_STATUS';
+export const COMMENT = 'COMMENT';
+export const LOGOUT_PROFILE = 'LOGOUT_PROFILE';
+export const LOGIN_PROFILE = 'LOGIN_PROFILE';
+
+export const UPDATE_TARGET_CREATORS_FOLLOW_STATUS = ' UPDATE_TARGET_CREATORS_FOLLOW_STATUS';
