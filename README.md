@@ -5,7 +5,8 @@ User can post a haiku, and delete, comment, update it.
 For authentication, I implemented custom authentication function and also Google OAuth 2.0. 
 I implemented MongoDB for all database. And for image, I used cloudinary.
 
-## Technologies used for the project
+## Technologies used in the project
+[![My Skills](https://skillicons.dev/icons?i=js,html,css,tailwind,react,nodejs,express,mongodb,redux)](https://skillicons.dev)
 
 ## Features 
 ### Post, Delete, Update, Comment, Like
