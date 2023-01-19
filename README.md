@@ -10,17 +10,17 @@ I implemented MongoDB for all database. And for image, I used cloudinary.
 
 ・HTML
 <br>
-・CSS 
+・CSS
 <br>
-・Javascript  
+・Javascript
 <br>
-・React  
+・React
 <br>
-・Tailwind  
+・Tailwind
 <br>
-・Redux(Redux Toolkit)  
+・Redux(Redux Toolkit)
 <br>
-・MongoDB  
+・MongoDB
 <br>
 ・Node.js(Express)
 
