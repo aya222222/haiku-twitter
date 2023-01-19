@@ -23,7 +23,7 @@ const Menu = () => {
   } 
   
   const fetchUserPosts =  () => {
-    dispatch(getUserPosts(userId, 0))
+    dispatch(getUserPosts({creator:userId, page:0}))
     dispatch(getCreatorProfile(userId))
      navigate(`/posts/${userId}`)
  }
@@ -61,10 +61,10 @@ useEffect(() => {
 }, [location]);
 
   return (
-    <div class="bg-bg-color border-t border-slate-500 flex 
-    phone:flex-col justify-around fixed w-full phone:bottom phone:justify-start
-    phone:relative phone:border-none lg:hidden
-    bottom-0 gap-4 phone:mt-4 phone:ml-4 py-4">
+    <div class="bg-bg-color border-t border-slate-500 flex z-10
+    md:flex-col justify-around fixed w-full md:bottom md:justify-start
+    md:relative md:border-none lg:hidden
+    bottom-0 gap-4 md:mt-4 md:ml-4 py-4">
       
       <div onClick={backToHome}  
         className='flex md:justify-start justify-center items-center gap-2'>
@@ -102,7 +102,7 @@ useEffect(() => {
         {/* if user is login, show logout icon.  */}
         {user ? <div 
             onClick={logout}
-            className='flex phone:hidden justify-center  items-center gap-2'>
+            className='flex md:hidden justify-center  items-center gap-2'>
 
           <div
             className="w-8">
@@ -114,7 +114,7 @@ useEffect(() => {
          : 
         <div
             onClick={login}
-            className='flex phone:hidden justify-center  items-center gap-2'
+            className='flex md:hidden justify-center  items-center gap-2'
         >
          <div
             className="w-8">

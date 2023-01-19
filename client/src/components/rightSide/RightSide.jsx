@@ -11,7 +11,7 @@ const RightSide = () => {
 
   return (
  
-    <div className='w-[20%] flex flex-col gap-4'>
+    <div className='hidden md:w-[20%] md:flex md:flex-col gap-4'>
      
         <AuthBtnCard />
 

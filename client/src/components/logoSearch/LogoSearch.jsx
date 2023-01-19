@@ -91,7 +91,7 @@ console.log('search is' + search)
    
     <div className='flex justify-center gap-2 w-[100%]'>
         <div onClick={backToHome}>
-        <img className="lg:block hidden" src={Logo} alt="logo" />
+        <img className="lg:block hidden cursor-pointer" src={Logo} alt="logo" />
         </div >
 
         <div className="flex flex-col  gap-2 rounded-xl 

@@ -181,7 +181,7 @@ export const commentPost = async (req, res) => {
   const { value } = req.body;
   const {commentorIconImg} = req.body;
 
-  console.log('id is ' + id)
+  console.log('value is ' + value)
   
 
   const post = await PostHaiku.findById(id).lean();
@@ -190,6 +190,7 @@ export const commentPost = async (req, res) => {
 
   const updatedPost = await PostHaiku.findByIdAndUpdate(id, post, { new: true }).lean();
 
+  console.log('updated post is ' + JSON.stringify(updatedPost))
   res.json(updatedPost)
 }
 
@@ -220,8 +221,8 @@ export const getUserPosts = async (req, res) => {
 
 export const deleteComment = async (req, res) => {
   const { id } = req.params;
-  const { commentId }  = req.body;
- 
+  const  {commentId}  = req.body;
+
   const post = await PostHaiku.findById(id).lean();
   
 

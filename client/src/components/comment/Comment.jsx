@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 const Comment = ({comment, index,  postId, commentId, clickedDots, setClickedDots}) => {
     const ref = useRef();
     console.log('comment is ' + JSON.stringify(comment))
-    console.log('text is ' + comment?.commentorIconImg)
+    console.log('text is ' + JSON.stringify(comment))
   
     const [showFuncs, setShowFuncs] = useState(false);
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Comment = ({comment, index,  postId, commentId, clickedDots, setClickedDot
     useOnClickOutside();
 
     const fetchUserPosts =  () => {
-        dispatch(getUserPosts(comment?.userId, 0))
+        dispatch(getUserPosts({creator:comment?.userId, page:0}))
         dispatch(getCreatorProfile(comment?.userId))
         // console.log('posts creator is ' + post.creator);
         navigate(`/posts/${comment?.userId}`)

@@ -23,13 +23,18 @@ export const targetCreatorProfileSlice = createSlice({
     initialState,
     reducers:{},
     extraReducers(builder){
-        builder.addCase(updateTargetCreatorFollowStatus.fulfilled, (state, action) => {
-            return {
-                ...state, 
-                follower : action.payload.follower
-            }
+        builder.addCase(updateTargetCreatorFollowStatus.pending, (state, action) => {
+            console.log('loading')
            
            })
+        .addCase(updateTargetCreatorFollowStatus.fulfilled, (state, action) => {
+            state.follower =  action.payload.follower;
+          
+           })
+        .addCase(updateTargetCreatorFollowStatus.rejected, (state, action) => {
+            console.log(action.error)
+           
+           })    
         
     }
 })

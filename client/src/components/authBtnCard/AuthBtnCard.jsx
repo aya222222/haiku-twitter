@@ -44,7 +44,7 @@ useEffect(() => {
 
   return (
     <>
-     <div className='phone:flex hidden justify-end gap-4'>
+     <div className='md:flex hidden justify-end gap-4'>
     {user && (
       <div className='ml-[150px]'>
          {/* <h6>{user?.result?.name}</h6> */}

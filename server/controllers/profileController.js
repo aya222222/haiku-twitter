@@ -8,23 +8,30 @@ export const getProfile = async (req, res) => {
 
   
     console.log(`hi! userId is ${req.userId}`)
-    try {
-        const userId = req.userId;
-        console.log(`again ${userId}`);
-        const totalPosts = await PostHaiku.countDocuments({"creator" : userId });
-        const existingUser = await Profile.findOne({userId}).lean();
-        console.log('loggedin user is ' + existingUser)
-      // if(existingUser){
-     
-        res.status(200).json({...existingUser, totalPosts})
+
+      
+
+        try {
+          const userId = req.userId;
+          console.log(`again ${userId}`);
+          const totalPosts = await PostHaiku.countDocuments({"creator" : userId });
+          const existingUser = await Profile.findOne({userId}).lean();
+          console.log('loggedin user is ' + existingUser)
+        // if(existingUser){
+          console.log('total is ' + totalPosts)
+          res.status(200).json({...existingUser, totalPosts})
+          
+        } catch (error) {
+          res.status(500).json({ message: "something went wrong"})
+          
+        }
       // }else{
       //   res.status(400).json({message: "No profiles"});
       //   console.log('no profile')
       // }
     
-    } catch (error) {
-      res.status(500).json({ message: "something went wrong"})
-    }
+
+
   }
 
   export const createProfile = async (req, res) => {
@@ -33,80 +40,110 @@ export const getProfile = async (req, res) => {
     const profileData = req.body;
     let bgImg;
     let iconImg;
-    if(profileData?.profileBgImg || profileData?.profileIconImg ){
-      bgImg = await cloudinary.uploader.upload(profileData?.profileBgImg);
-      iconImg = await cloudinary.uploader.upload(profileData?.profileIconImg);
-     }
-    const newProfile = new Profile({
-      ...profileData, 
-      profileBgImg: bgImg?.secure_url,
-      profileIconImg: iconImg?.secure_url,
-      cloudinaryIconId: iconImg?.public_id,  
-      cloudinaryBgId: bgImg?.public_id,  
-      userId: userId
-    });
- 
-    try {
-      await newProfile.save();
 
-      res.status(201).json(newProfile);
-    } catch (error) {
-      res.status(409).json( { message: error.message })
-    }
+    console.log(  profileData.profileIconImg + 'bio is ')
+
+    
+    try {
+      if(profileData?.profileBgImg || profileData?.profileIconImg ){
+        console.log('image contained')
+    
+        bgImg = await cloudinary.uploader.upload(profileData?.profileBgImg, {timeout:120000}, function(error,result){});
+        iconImg = await cloudinary.uploader.upload(profileData?.profileIconImg, {timeout:120000}, function(error,result){});
+       }
+     
+       
+       console.log('try!!')
+      } catch (error) {
+        console.log(error)
+      }
+      
+      console.log('first ' )
+      const newProfile = new Profile({
+        ...profileData, 
+        profileBgImg: bgImg?.secure_url,
+        profileIconImg: iconImg?.secure_url,
+        cloudinaryIconId: iconImg?.public_id,  
+        cloudinaryBgId: bgImg?.public_id,  
+        userId: userId
+      });
+      
+      console.log('second ' )
+      
+      try {
+        console.log('third ' )
+        res.status(201).json(newProfile);
+         await newProfile.save();
+       } catch (error) {
+        res.status(409).json( { message: error.message })
+       }
   } 
 
   export const updateProfile = async (req, res) => {
     const { id } = req.params;
 
       //receive from frontend
-    const profileData = req.body;
+    const profileData = await req.body;
+    console.log('profiledata is ' + JSON.stringify(profileData))
     let newIconImg;
     let newBgImg;
     const userId = req.userId;
     const oldProfile = await Profile.findOne({userId}).lean();
-  
+ 
+    console.log(  'new profile is ')
     if(!mongoose.Types.ObjectId.isValid(oldProfile._id)) return res.status(404).send("no profile with that id");
     
     // let oldProfile = await Profile.findById(id);
-    
-    //if you change Icon image
-    if(profileData?.profileIconImg !== oldProfile?.profileIconImg){
-    
-      //delete icon image from cloudinary
-      if(oldProfile?.cloudinaryIconId){
-        await cloudinary.uploader.destroy(oldProfile.cloudinaryIconId);
+          
+  
+ 
+   try {
+    console.log('inside of try')
+       //if you change Icon image
+       if(profileData?.profileIconImg !== oldProfile?.profileIconImg){
+         console.log('first update')
+        //delete icon image from cloudinary
+        if(oldProfile?.cloudinaryIconId){
+          await cloudinary.uploader.destroy(oldProfile.cloudinaryIconId);
+        }
+  
+       //upload new icon image to cloudinary
+       console.log('second update')
+       newIconImg = await cloudinary.uploader.upload(profileData.profileIconImg, {timeout:120000}, function(error,result){});
+       console.log('third update')
+      }
+      
+        //if you change bg image
+      if(profileData?.profileBgImg !== oldProfile.profileBgImg){
+        console.log('4 update')
+        //delete bg image from cloudinary
+       await cloudinary.uploader.destroy(oldProfile.cloudinaryBgId);
+  
+       //upload new bg image to cloudinary
+       newBgImg = await cloudinary.uploader.upload(profileData.profileBgImg, {timeout:120000}, function(error,result){});
+       console.log('5 update')
+      }
+     
+  
+      const updatedProfile = await Profile.findByIdAndUpdate(
+        oldProfile._id, 
+        {...profileData, 
+         profileIconImg: newIconImg?.secure_url,
+         profileBgImg: newBgImg?.secure_url,
+         cloudinaryIconId: newIconImg?.public_id,  
+         cloudinaryBgId: newBgImg?.public_id, 
+         
+        },
+         {new: true}
+         ).lean()
+        console.log('profile updated')
+        res.status(201).json(updatedProfile);
+
+      } catch (error) {
+        res.status(409).json( { message: error.message })
       }
 
-     //upload new icon image to cloudinary
-     newIconImg = await cloudinary.uploader.upload(profileData.profileIconImg);
-    }
     
-      //if you change bg image
-    if(profileData?.profileBgImg !== oldProfile.profileBgImg){
-
-      //delete bg image from cloudinary
-     await cloudinary.uploader.destroy(oldProfile.cloudinaryBgId);
-
-     //upload new bg image to cloudinary
-     newBgImg = await cloudinary.uploader.upload(profileData.profileBgImg);
-    }
-   
-
-    const updatedProfile = await Profile.findByIdAndUpdate(
-      oldProfile._id, 
-      {...profileData, 
-       profileIconImg: newIconImg?.secure_url,
-       profileBgImg: newBgImg?.secure_url,
-       cloudinaryIconId: newIconImg?.public_id,  
-       cloudinaryBgId: newBgImg?.public_id, 
-       
-      },
-       {new: true}
-       ).lean()
- 
-    
-   console.log(`this is updated profile ${updatedProfile}`)
-    res.json(updatedProfile);
   }
 
   export const getCreatorProfile = async (req, res) => {

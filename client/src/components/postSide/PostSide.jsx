@@ -23,7 +23,6 @@ const PostSide = ({
   openLikeModal,
   setOpenLikeModal,
   postsPerPage, 
-  tags,
   editFlag, 
   setEditFlag, 
   listOfFollowers,
@@ -34,7 +33,8 @@ const PostSide = ({
   setListOfCreatorFollowers,
   listOfCreatorFollowing,
   setListOfCreatorFollowing,
-
+  tags,
+  setTags
 }) => {
 
   const  {posts, isLoading} = useSelector((state) => state.posts);
@@ -61,7 +61,15 @@ function useQuery() {
 
 
 useEffect(() => {
-  dispatch(getPosts(0))
+  // if(!creator){
+    dispatch(getPosts(0))
+
+  // }
+  //   else if((searchTags || searchQuery )){
+  //   dispatch(getPostsBySearch({ search: searchQuery, tags:  searchTags? searchTags : null}));
+
+  // }
+
 }, [dispatch])
 
 // useEffect(() => {
@@ -97,11 +105,14 @@ useEffect(() => {
 console.log('last posts ' + JSON.stringify(posts))
   return (
     <>
-    <div className='w-[70%] flex flex-col min-h-screen'>
+    <div className='w-full md:w-[70%] flex flex-col items-center min-h-screen'>
      <div className='lg:hidden flex w-full justify-center mt-5 mx-0
        pb-5
      '>
-      <LogoSearch />
+      <LogoSearch 
+        tags={tags}
+        setTags={setTags}
+      />
      </div> 
        {creator && 
        <CreatorsProfileCard 

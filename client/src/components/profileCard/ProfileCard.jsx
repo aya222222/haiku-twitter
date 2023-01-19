@@ -27,7 +27,7 @@ const ProfileCard = (
   const userId = user?.result?._id || user?.result?.sub
   // const loggedInUser = useSelector((state) => state.profileReducer?.userId == userId );
   const existingProfile = useSelector((state) => state.profile);
-
+  console.log('existingprofile is '  + JSON.stringify(existingProfile))
   const username = user?.result?.username || user?.result?.name;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const ProfileCard = (
   // const id = userId;
 
   const fetchUserPosts =  () => {
-    dispatch(getUserPosts(userId, 0))
+    dispatch(getUserPosts({creator:userId, page:0}))
     dispatch(getCreatorProfile(userId))
     // console.log('posts creator is ' + post.creator);
     navigate(`/posts/${userId}`)

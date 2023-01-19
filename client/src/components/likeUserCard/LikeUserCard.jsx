@@ -34,7 +34,7 @@ const LikeUserCard = ({likeUser, setOpenLikeModal}) => {
 
      
     const fetchUserPosts =  () => {
-      dispatch(getUserPosts(likeUserId, 0))
+      dispatch(getUserPosts({creator:likeUserId, page:0}))
       dispatch(getCreatorProfile(likeUserId))
       // console.log('posts creator is ' + post.creator);
       navigate(`/posts/${likeUserId}`)

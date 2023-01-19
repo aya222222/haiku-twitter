@@ -27,7 +27,7 @@ const ProfileSide = (
   return (
 
 
-    <div className='w-[20%] flex flex-col gap-4'>
+    <div className='hidden md:w-[20%] md:flex md:flex-col gap-4'>
      
     <div className='lg:flex hidden'>
       <LogoSearch 
@@ -57,13 +57,13 @@ const ProfileSide = (
             openHaikuModal={openHaikuModal} 
             setOpenHaikuModal={setOpenHaikuModal}
           />
-          <div className='phone:flex hidden'>
+          <div className='md:flex hidden'>
             <Menu />
           </div>
         </>
       ) :
        <>
-        <div>
+        <div className='md:flex hidden'>
             <Menu />
         </div>
         <h6 className='text-center'>Please sign in to create your haiku.</h6>

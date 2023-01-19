@@ -87,7 +87,8 @@ function App() {
           setOpenProfileModal={setOpenProfileModal}
           openLikeModal={openLikeModal}
           setOpenLikeModal={setOpenLikeModal}
-          tags={tags} setTags={setTags} 
+          tags={tags} 
+          setTags={setTags} 
           currentId={currentId}
           setCurrentId={setCurrentId}
           editFlag={editFlag} setEditFlag={setEditFlag}
@@ -108,6 +109,7 @@ function App() {
           openLikeModal={openLikeModal}
           setOpenLikeModal={setOpenLikeModal}
           tags={tags}
+          setTags={setTags}
           editFlag={editFlag} setEditFlag={setEditFlag}
           // listOfFollowers={listOfFollowers}
           // setListOfFollowers={setListOfFollowers}
@@ -132,6 +134,8 @@ function App() {
           setListOfCreatorFollowers={setListOfCreatorFollowers}
           listOfCreatorFollowing={listOfCreatorFollowing} 
           setListOfCreatorFollowing={setListOfCreatorFollowing}
+          tags={tags}
+          setTags={setTags}
           />} /> 
        <Route path={`:id/following`} exact element={<FollowList  
           // followersList={followersList}
@@ -144,6 +148,8 @@ function App() {
           setListOfCreatorFollowers={setListOfCreatorFollowers}
           listOfCreatorFollowing={listOfCreatorFollowing} 
           setListOfCreatorFollowing={setListOfCreatorFollowing}
+          tags={tags}
+          setTags={setTags}
          />} /> 
         </Route> 
 
@@ -166,6 +172,7 @@ function App() {
           openLikeModal={openLikeModal}
           setOpenLikeModal={setOpenLikeModal}
           tags={tags}
+          setTags={setTags}
           editFlag={editFlag} setEditFlag={setEditFlag}
           />}/>
         </Route> 
@@ -176,7 +183,8 @@ function App() {
           setOpenProfileModal={setOpenProfileModal}
           openLikeModal={openLikeModal}
           setOpenLikeModal={setOpenLikeModal}
-          tags={tags} setTags={setTags}
+          tags={tags} 
+          setTags={setTags}
           listOfFollowers={listOfFollowers}
           setListOfFollowers={setListOfFollowers}
           listOfFollowing={listOfFollowing}
@@ -194,6 +202,7 @@ function App() {
           openLikeModal={openLikeModal}
           setOpenLikeModal={setOpenLikeModal}
           tags={tags}
+          setTags={setTags}
           editFlag={editFlag} setEditFlag={setEditFlag}
           listOfFollowers={listOfFollowers}
           setListOfFollowers={setListOfFollowers}
@@ -213,7 +222,8 @@ function App() {
         setOpenLikeModal={setOpenLikeModal}
         openProfileModal={openProfileModal} 
         setOpenProfileModal={setOpenProfileModal}
-        tags={tags} setTags={setTags}/>}>
+        tags={tags} 
+        setTags={setTags}/>}>
           <Route path='' element={ <PostSide 
             currentId={currentId}
             setCurrentId={setCurrentId}
@@ -222,6 +232,7 @@ function App() {
             openLikeModal={openLikeModal}
             setOpenLikeModal={setOpenLikeModal}
             tags={tags}
+            setTags={setTags}
             editFlag={editFlag} setEditFlag={setEditFlag}
             />}> 
           

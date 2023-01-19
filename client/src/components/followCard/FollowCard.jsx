@@ -44,14 +44,15 @@ const FollowCard = ({follow, followingList}) => {
 
    
   const fetchUserPosts =  () => {
-    dispatch(getUserPosts(followId, 0))
+    dispatch(getUserPosts({creator:followId, page:0}))
     dispatch(getCreatorProfile(followId))
     // console.log('posts creator is ' + post.creator);
     navigate(`/posts/${followId}`)
   }
 
   return (
-    <div className="w-full lg:w-[85%] bg-bg-color border border-solid border-slate-500 rounded-3xl p-5 flex gap-4 justify-between items-center cursor-pointer" onClick={fetchUserPosts}>
+    <div className="w-full lg:w-[85%] bg-bg-color border border-solid border-slate-500 rounded-3xl p-5 flex gap-4 justify-between items-center cursor-pointer" 
+      onClick={fetchUserPosts}>
       <div className="flex justify-center gap-4">
 
       <div className=''>

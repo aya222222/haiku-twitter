@@ -7,6 +7,7 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { deletePost, likePost, getUserPosts, getPost } from '../../features/posts/postsSlice'
 import { getCreatorProfile } from '../../features/creatorProfile/creatorProfileSlice';
 import Comments from '../comments/Comments';
+import { useEffect } from 'react';
 
 
 
@@ -26,29 +27,28 @@ const Post = ({
 
  const user = JSON.parse(localStorage.getItem('profile'));
  const [likes, setLikes] = useState(post?.likes);
+ console.log('likes are ' + JSON.stringify(likes))
  const userId = user?.result?._id || user?.result?.sub
- const hasLikedPost = likes?.find((user) => user?.userId === userId) 
-
-
-
-
+ let hasLikedPost = likes?.find((user) => user?.userId === userId) 
+ console.log("hasliked " + likes)
+ 
+ 
  function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
- const query = useQuery();
- const page = query.get('page') || 0;
-
- const dispatch = useDispatch();
- const navigate = useNavigate();
- const {postId} = useParams();
- console.log('postId is ' + postId)
-//  const query = useQuery();
-//  const page = query.get('page') || 0;
-const loggedInUser = useSelector((state) => state.profile)
-// const creatorIconImg = useSelector((state) => state.creatorProfileReducer.profileIconImg)
-
-
-
+   return new URLSearchParams(useLocation().search);
+  }
+  const query = useQuery();
+  const page = query.get('page') || 0;
+  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {postId} = useParams();
+  console.log('postId is ' + postId)
+  //  const query = useQuery();
+  //  const page = query.get('page') || 0;
+  const loggedInUser = useSelector((state) => state.profile)
+  // const creatorIconImg = useSelector((state) => state.creatorProfileReducer.profileIconImg)
+  
+  
 
  const toggleLike = async () => {
    
@@ -56,14 +56,14 @@ const loggedInUser = useSelector((state) => state.profile)
      
      dispatch(likePost(post._id)); 
      
-     //it way faster to use state to toggle like than fetch from mongoDB evreytime.
+     //it's way faster to use state to toggle like than fetch from mongoDB evreytime.
     if(hasLikedPost){
       setLikes(likes.filter((user) => user.userId !== userId))
    
       
-    }else{
+    }else if(!hasLikedPost){
       //if the post is not liked by loggged in user(custom auth or google auth), setLike(true)
-      setLikes([...post.likes, {
+      setLikes([...likes, {
         userId: userId,
         username:loggedInUser.username,
         profileIconImg: loggedInUser.profileIconImg,
@@ -83,7 +83,7 @@ const loggedInUser = useSelector((state) => state.profile)
  }
  
  const fetchUserPosts =  () => {
-    dispatch(getUserPosts(post.creator, 0))
+    dispatch(getUserPosts({creator: post.creator, page:0}))
     dispatch(getCreatorProfile(post.creator))
      console.log('posts creator is ' + post.creator);
      navigate(`/posts/${post.creator}`)
@@ -98,9 +98,22 @@ const loggedInUser = useSelector((state) => state.profile)
  }
 //  const openPost = () => navigate(`/posts/${post._id}`);
 
+var windowSize = window.innerWidth;
+
+const createOrUpdateHaiku = () => {
+  
+  setCurrentId(post._id); 
+
+  if (windowSize < 1024) { 
+    navigate('/create')
+  } else {
+    setOpenHaikuModal(true)
+  }
+}
+
   return (
     <>
-    <div className='w-[85%] rounded-3xl p-5 flex flex-col gap-4 border-slate-500 border-solid border'>
+    <div className='w-full rounded-3xl p-5 flex flex-col gap-4 border-slate-500 border-solid border'>
         <div className='flex items-center w-fit
          gap-4 cursor-pointer 
         '  onClick={fetchUserPosts}>
@@ -164,11 +177,7 @@ const loggedInUser = useSelector((state) => state.profile)
           {(userId === post?.creator) &&
           <div className='flex justify-between w-[35%]'>
             <div className="text-center"
-            onClick={()=>{
-              setCurrentId(post._id); 
-              setOpenHaikuModal(true)
-              
-              } }>
+            onClick={createOrUpdateHaiku}>
               <FiEdit className='cursor-pointer w-7 h-7 opacity-40'/>
             </div>
 

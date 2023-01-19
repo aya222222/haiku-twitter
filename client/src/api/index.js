@@ -19,8 +19,10 @@ export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updated
 export const deletePost = (id) => API.delete(`/posts/${id}`);
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 export const getPost = (id) => API.get(`/posts/${id}/getPost`);
-export const commentPost = (value, commentorIconImg, id) => API.post(`/posts/${id}/commentPost`, { value, commentorIconImg });
-export const deleteComment = (id, commentId) => API.patch(`/posts/post/${id}/commentDelete`, commentId);
+export const commentPost = (value, commentorIconImg, id) =>  API.post(`/posts/${id}/commentPost`, { value, commentorIconImg }); 
+  
+
+export const deleteComment = (id, commentId) => API.patch(`/posts/post/${id}/commentDelete`, {commentId});
 export const editComment = (id, commentId) => API.patch(`/posts/post/${id}/commentEdit`, commentId);
 export const getUserPosts = (creator, page) => API.get(`/posts/${creator}?page=${page}`)
 

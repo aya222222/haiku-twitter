@@ -6,7 +6,7 @@ import './Auth.css'
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 import { useDispatch } from 'react-redux';
-import { signup, login } from '../../features/auth/authSlice';
+import { signup, login, googleAuth } from '../../features/auth/authSlice';
 import { logInProfile } from '../../features/profile/profileSlice';
 import { useSelector } from 'react-redux';
 
@@ -50,6 +50,7 @@ const Auth = () => {
       // console.log(result);
 
     try {
+      dispatch(googleAuth({result, token}))
       dispatch({ type: 'AUTH', data: {result, token}});
       //route to home if you login successfully.
       navigate('/');
