@@ -5,7 +5,7 @@ I love building full stack projects.
 
 
 Skills:
-* [![My Skills](https://skills.thijs.gg/icons?i=html,css,tailwind,js,react,nodejs,mongodb&theme=light)](https://skills.thijs.gg)
+* [![My Skills](https://skills.thijs.gg/icons?i=html,css,tailwind,js,react,nodejs,redux,redux toolkit,express.jsmongodb&theme=light)](https://skills.thijs.gg)
 REACT / JS / HTML / CSS/ Tailwind / Redux / Redux Toolkit / MongoDB / Node.js / Express.js 
 
 - 🔭 I’m currently working on this page. 
