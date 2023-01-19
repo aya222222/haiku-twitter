@@ -6,7 +6,9 @@ For authentication, I implemented custom authentication function and also Google
 I implemented MongoDB for all database. And for image, I used cloudinary.
 
 ## Technologies used in the project
-[![My Skills](https://skillicons.dev/icons?i=js,html,css,tailwind,react,nodejs,express,mongodb,redux)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=html,css,tailwind,js,react,nodejs,express,mongodb,redux)](https://skillicons.dev)
+
+HTML, CSS, Javascript, React, Tailwind, Redux(Redux Toolkit), MongoDB, Node.js(Express)
 
 ## Features 
 ### Post, Delete, Update, Comment, Like
