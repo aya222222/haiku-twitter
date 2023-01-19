@@ -23,6 +23,7 @@ export const getPosts = createAsyncThunk(
 export const getPostsBySearch = createAsyncThunk(
     'posts/getPostsBySearch', async(searchQuery) => {
         const { data : {data} } = await api.fetchPostsBySearch(searchQuery);
+        console.log('search data is ' + JSON.stringify(data))
         return data;
     }
 ) 
@@ -41,10 +42,10 @@ export const createPost = createAsyncThunk(
 
 
 export const updatePost = createAsyncThunk(
-    'posts/updatePost', async(id, post) => {
+    'posts/updatePost', async(dataObj) => {
         try {
             
-            const {data} = await api.updatePost(id, post);
+            const {data} = await api.updatePost(dataObj.currentId, dataObj.postData);
             return data;
         } catch (error) {
             console.log(error)
@@ -55,7 +56,8 @@ export const updatePost = createAsyncThunk(
 export const deletePost = createAsyncThunk(
     'posts/deletePost', async(id) => {
       try {
-        await api.deletePost(id);
+         await api.deletePost(id);
+        return id;
       } catch (error) {
         console.log(error)
       }
@@ -87,13 +89,12 @@ export const getPost = createAsyncThunk(
 
 
 export const commentPost = createAsyncThunk(
-    'posts/commentPost', async(value, commentorIconImg, id) => {
+    'posts/commentPost', async(dataObj) => {
       try {
-        console.log('comment post before ' + id)
-        const {data} = await api.commentPost(value,commentorIconImg, id);
-        console.log('comment post ' + data)
-        return data;
-
+        console.log('dataObj' + dataObj.id)
+        const { data } = await api.commentPost(dataObj.value,dataObj.commentorIconImg, dataObj.id);
+        console.log('comment post ' +  data)
+        return data
       } catch (error) {
          console.log(error)
       }
@@ -101,9 +102,10 @@ export const commentPost = createAsyncThunk(
 ) 
 
 export const getUserPosts = createAsyncThunk(
-    'posts/getUserPosts', async(creator, page) =>{
+    'posts/getUserPosts', async(dataObj) =>{
         try {
-            const { data }  = await api.getUserPosts(creator, page);
+            const { data }  = await api.getUserPosts(dataObj.creator, dataObj.page);
+        
             return data;
 
         } catch (error) {
@@ -113,9 +115,11 @@ export const getUserPosts = createAsyncThunk(
 )
 
 export const deleteComment = createAsyncThunk(
-    'posts/deleteComment', async(postId, commentId) => {
+    'posts/deleteComment', async(dataObj) => {
         try {
-            const { data } = await api.deleteComment(postId, commentId);
+            console.log('data obj' + JSON.stringify(dataObj))
+            const { data } = await api.deleteComment(dataObj.postId, dataObj.commentId);
+           console.log('commentID is ' + JSON.stringify(data))
             return data;
 
         } catch (error) {
@@ -132,106 +136,118 @@ export const postsSlice = createSlice({
          state.isLoading = true;
         
         })
-        .addCase(getPosts.fulfilled, (state, action) => {
-            // return {
-            //     ...state,
-            //     isLoading: false,
-            //     posts:action.payload.posts,
-            //     totalPages:action.payload.totalPages
-
-            // }
+        .addCase(getPosts.fulfilled, (state, action) => { 
             state.isLoading = false;
-            console.log('data is ' + state.posts)
             state.posts = action.payload.posts;
             state.totalPages = action.payload.totalPages
         })
+        .addCase(getPosts.rejected, (state, action) => {
+            console.log(action.error)
+        })
         .addCase(getPostsBySearch.pending,(state, action) => {
             state.isLoading = true;
-            // return {
-            //     ...state,
-            //     isLoading: true
-            // }
+        
         })
         .addCase(getPostsBySearch.fulfilled, (state, action) => {
-            // return {
-            //     ...state,
-            //     isLoading: false,
-            //     posts: action.payload
-            // }
             state.isLoading = false;
-            state.posts = action.payload.posts;
-
+            state.posts = action.payload;
+            console.log('state posts is ' + state)
+        })
+        .addCase(getPostsBySearch.rejected,(state, action) => {
+            console.log(action.error)
+        
+        })
+        .addCase(createPost.pending,(state, action) => {
+            state.isLoading = true;
+        
         })
         .addCase(createPost.fulfilled, (state, action) => {
+            state.isLoading = false;
             if(state.posts.length > 6) state.posts.pop();
-            // return {
-            //     ...state,
-            //     posts: [action.payload, ...state.posts]
-            // }
             state.posts = [action.payload, ...state.posts]
         })
+        .addCase(createPost.rejected,(state, action) => {
+            console.log(action.error)
+        
+        })
+        .addCase(updatePost.pending,(state, action) => {
+            state.isLoading = true;
+        
+        })
         .addCase(updatePost.fulfilled, (state, action) => {
-            // return {
-            //     ...state,
-            //      posts: state.posts.map((post) => post._id === action.payload._id ? action.payload : post)
-            // }
+            state.isLoading = false;
             state.posts = state.posts.map((post) => 
             post._id === action.payload._id ? action.payload : post)
         })
+        .addCase(updatePost.rejected,(state, action) => {
+            console.log(action.error)
+        
+        })
+        .addCase(getPost.pending,(state, action) => {
+            state.isLoading = true;
+        
+        })
         .addCase(getPost.fulfilled, (state, action) => {
-            // return {
-            //     ...state, 
-            //     posts: [action.payload] }
+            state.isLoading = false;
             state.posts = [action.payload]
         })
+        .addCase(getPost.rejected,(state, action) => {
+            console.log(action.error)
+        
+        })
+        .addCase(deletePost.pending,(state, action) => {
+            state.isLoading = true;
+        
+        })
         .addCase(deletePost.fulfilled, (state, action) => {
+            state.isLoading = false;
             state.posts = state.posts.filter((post) => post._id !== action.payload)
-            // return {
-            //     ...state, 
-            //     posts: state.posts.filter((post) => post._id !== action.payload )
-            // };
-    
+
+        })
+        .addCase(deletePost.rejected,(state, action) => {
+            console.log(action.error)
+        
+        })
+        .addCase(commentPost.pending,(state, action) => {
+            state.isLoading = true;
+        
         })
         .addCase(commentPost.fulfilled, (state, action) => {
-            // return {
-            //     ...state,
-            //     posts: state.posts.map((post) => {
-            //         //change the post that just received a comment
-            //         if(post._id === action.payload._id){
-            //             return action.payload;
-            //         }
-            //         //return all the other posts normally
-            //         return post;
-            //     })
-            // }    
-            state.posts = state.posts.map((post) =>{
-                if(post._id === action.payload._id){
-                    return action.payload;
-                }
-                //return all the other posts normally
-                return post;
-            }
-                
-            )
+            state.isLoading = false;
+            state.posts = state.posts.map((post) => 
+            post._id === action.payload._id ? action.payload : post)
+    
+        })
+        .addCase(commentPost.rejected,(state, action) => {
+            console.log(action.error)
+        
+        })
+        .addCase(getUserPosts.pending,(state, action) => {
+            state.isLoading = true;
+        
         })
         .addCase(getUserPosts.fulfilled, (state, action) => {
-            // return  {
-            //      ...state,
-            //      posts:action.payload.posts, 
-            //      totalPosts: action.payload.totalPosts, 
-            //      totalPages:action.payload.totalPages
-            //     };
+            state.isLoading = false;
             state.posts = action.payload.posts;
             state.totalPosts = action.payload.totalPosts;
             state.totalPages = action.payload.totalPages;
         })
+        .addCase(getUserPosts.rejected,(state, action) => {
+            console.log(action.error)
+        
+        })
+        .addCase(deleteComment.pending,(state, action) => {
+            state.isLoading = true;
+        
+        })
         .addCase(deleteComment.fulfilled, (state,action) => {
+            state.isLoading = false;
             state.posts = state.posts.map((post) => post._id === action.payload._id ? action.payload : post)
-      
-            // return {
-            //     ...state, 
-            //     posts: state.posts.map((post) => post._id === action.payload._id ? action.payload : post) 
-            // }    
+    
+        })
+        .addCase(deleteComment.rejected,(state, action) => {
+            console.log(action.error)
+        
         })
        },
 

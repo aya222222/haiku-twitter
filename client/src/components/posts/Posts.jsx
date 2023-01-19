@@ -49,7 +49,7 @@ const Posts = ({
   <>
   
      <div className='flex flex-col justify-center items-center gap-4 
-       my-5 mx-0 p-5 rounded-2xl w-full'> 
+       my-5 mx-0 p-5 rounded-2xl md:w-full w-[85%]'> 
      
       {posts.map((post) => {
      

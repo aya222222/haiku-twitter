@@ -4,6 +4,7 @@ import creatorProfileReducer from '../features/creatorProfile/creatorProfileSlic
 import profileReducer from '../features/profile/profileSlice'
 import  targetCreatorProfileReducer  from "../features/targetCreatorProfile/targetCreatorProfileSlice";
 import authReducer from "../features/auth/authSlice";
+import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
 export const store = configureStore({
     reducer: {
@@ -13,5 +14,12 @@ export const store = configureStore({
         targetCreatorProfile: targetCreatorProfileReducer,
         auth: authReducer
 
-    }
+    },
+     
+    middleware:(getDefaultMiddleware) => 
+        getDefaultMiddleware({
+            serializableCheck: false
+        })
+    
+
 })

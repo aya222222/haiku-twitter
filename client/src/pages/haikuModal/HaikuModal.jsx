@@ -44,7 +44,7 @@ const HaikuModal = ({
     
     if(effectRan.current === false){
     //if you click edit button
-    if(post){
+    if(currentId){
       console.log(currentId)
       setPostData(post);
       setEditFlag(false);
@@ -66,7 +66,8 @@ const HaikuModal = ({
    
    //edit post
    if(currentId){
-   dispatch(updatePost(currentId, {...postData, username, profileIconImg: existingProfile.profileIconImg }));
+    dispatch(updatePost( {currentId, postData:{...postData, username, profileIconImg: existingProfile.profileIconImg} }));
+   
     navigate('/');
     
   
@@ -197,17 +198,22 @@ const HaikuModal = ({
    if(openHaikuModal && existingProfile) return (
    
     <>
-    
-     < div className='Modal' onClick={(e) => { clickOutSide(e) } }>
-        <div className="modalInner">
-        <span className="fa-solid fa-xmark"  
+    {/* Modal  */}
+     < div className='fixed z-10 left-0 top-0 h-screen w-full overflow-auto bg-slate-600 bg-opacity-50' 
+          onClick={(e) => { clickOutSide(e) } }>
+     {/* modalInner */}
+        <div className=" w-[28%] bg-bg-color pt-[10px] pr-[25px] pb-[25px] pl-[25px]
+                         top-1/2 left-1/2 relative -translate-x-1/2 -translate-y-1/2 
+                         rounded-3xl">
+        <span className="fa-solid fa-xmark  absolute right-[15px] top-[10px] cursor-pointer text-white hover:text-slate-500"  
         onClick={(e) => {
           console.log('invoked')
           checkTextExists();
           
           }
            }></span>
-        <div className="haikuSection">
+           {/* haikuSection */}
+        <div className=" flex flex-col justify-center items-center gap-7 mt-[25px]">
           {/* <input type="text" className='textInput creator' name="creator"
           value={postData.creator}
           placeholder="creator"
@@ -216,8 +222,8 @@ const HaikuModal = ({
             checkEditing()
           }}
           /> */}
-
-        <textarea className="textInput"name="haiku-text"
+{/* textInput */}
+        <textarea className=" w-full p-2.5 outline-none border-none rounded-md bg-card-color "name="haiku-text"
          value={postData.text}
          onChange={
           (e) => {
@@ -228,8 +234,8 @@ const HaikuModal = ({
          id="" cols="30" rows="10"placeholder='post haiku'
          >{postData.text}        
          </textarea>
-
-         <input type="text" className='textInput' name="tags"
+         {/* textInput mb-[25px] h-[30px] */}
+         <input type="text" className=' w-full h-[30px] p-2.5 outline-none border-none rounded-md bg-card-color ' name="tags"
           value={postData.tags}
           placeholder="tags"
           onChange={(e) => 
@@ -240,8 +246,8 @@ const HaikuModal = ({
            
           }}
           />
-          
-          <div className='fileBase'>
+          {/* fileBase  */}
+          <div className='mr-auto'>
           <input
             style={{alignSelf: 'flex-start'}}
             type="file"
@@ -254,11 +260,28 @@ const HaikuModal = ({
           }}
             />
             </div>
-         <div className="haikuBtn">
-         <button className='postBtn button' 
+            {/* haikuBtn  */}
+         <div className="flex gap-4">
+         {/* postBtn button  */}
+         <button className='rounded-3xl bg-border-color 
+          text-bg-color px-2.5 py-1 w-[70px]
+          border-none outline-none  
+          transition-all ease-out duration-200
+          cursor-pointer 
+          hover:text-white
+          hover:outline-2  hover:outline-solid hover:outline-slate-200
+          hover:bg-bg-color' 
           disabled={ emptyValues ? true : false}
           onClick={handleSubmit}>POST</button>    
-         <button className='deleteBtn button' 
+          {/* deleteBtn button  */}
+         <button className='rounded-3xl 
+          text-border-color px-2.5 py-1 w-[70px]
+          border-none outline-none  
+          transition-all ease-out duration-200
+          cursor-pointer 
+          hover:text-white
+          hover:outline-2  hover:outline-solid hover:outline-slate-200
+          hover:bg-bg-color' 
           disabled={emptyValues ? true: false}
           // disabled={ !setInputFlag ? true : false}
           onClick={()=> {
@@ -274,18 +297,38 @@ const HaikuModal = ({
    
           
     {openAlertModal  && (
-       <div className='Modal'>
-       <div className="deleteAlertModalInner">
-       <span className="fa-solid fa-xmark"  onClick={(e) => setOpenAlertModal(false) }></span>
-       <div className="deleteAlertModalSection">
+      // Modal 
+       <div className='fixed z-10 left-0 top-0 h-screen w-full overflow-auto bg-slate-600 bg-opacity-50'>
+       {/* deleteAlertModalInner */}
+       <div className=" bg-bg-color  px-[15px] py-[25px] w-1/4 left-1/2 top-1/2 relative -translate-y-1/2 -translate-x-1/2 rounded-md">
+       <span className="fa-solid fa-xmark  absolute right-[10px] top-[7px] z-10  cursor-pointer hover:text-slate-500"  onClick={(e) => setOpenAlertModal(false) }></span>
+       {/* deleteAlertModalSection  */}
+       <div className="flex flex-col items-center opacity-100 gap-4">
        <h4>Do you really want to {clear? `clear all?` : `leave without save it?`} </h4>
-     <div className="alertBtnSection">
-     <button className='button deleteBtn' 
+       {/* alertBtnSection */}
+     <div className=" flex gap-2.5">
+     {/* button deleteBtn  */}
+     <button className='rounded-3xl bg-bg-color
+                                text-border-color px-4 py-2 
+                                border-none outline-none  text-xl
+                                transition-all ease-out duration-200
+                                cursor-pointer 
+                                hover:text-white
+                                hover:outline-2  hover:outline-solid hover:outline-slate-200
+                                hover:bg-bg-color w-24 ' 
       onClick={handleClearOrCloseModal}
        >
         YES
       </button>
-     <button className='button postBtn' 
+      {/* button postBtn  */}
+     <button className='rounded-3xl bg-border-color
+                              text-bg-color px-4 py-2 
+                              border-none outline-none  text-xl
+                              transition-all ease-out duration-200
+                              cursor-pointer 
+                              hover:text-white
+                              hover:outline-2  hover:outline-solid hover:outline-slate-200
+                              hover:bg-bg-color w-24' 
       onClick={(e) => setOpenAlertModal(false)}>
         NO
      </button>

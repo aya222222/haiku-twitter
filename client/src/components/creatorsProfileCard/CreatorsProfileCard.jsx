@@ -4,7 +4,7 @@ import profileImage from '../../img/profileImg.jpg'
 import cover from '../../img/cover.jpg'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, Link } from 'react-router-dom'
-import { getUserPosts } from '../../actions/postAction'
+import { getUserPosts } from '../../features/posts/postsSlice'
 import { getProfile,followOrUnfollowCreator } from '../../features/profile/profileSlice'
 import { updateCreatorFollowStatus } from '../../features/creatorProfile/creatorProfileSlice'
 
@@ -54,9 +54,10 @@ const CreatorsProfileCard = ({
    
   
   return (
-    <div className='rounded-3xl bg-bg-color overflow-x-clip w-full border-slate-500 border border-b'>
+    <div className='flex justify-center md:w-full w-[85%] items-center '>
+    <div className='my-5 mx-0 p-5  w-full rounded-3xl bg-bg-color overflow-x-clip border-slate-500 border border-b'>
         <div className="relative flex flex-col items-center justify-center w-full h-[200px]">
-        {creatorsProfile?.profileBgImg ? <img className="h-full w-full object-cover " src={ creatorsProfile?.profileBgImg } alt="" /> : <img className="w-[100px]" src={cameraIcon } alt="" /> } 
+        {creatorsProfile?.profileBgImg ? <img className="h-full w-full object-cover object-center " src={ creatorsProfile?.profileBgImg } alt="" /> : <img className="w-[100px]" src={cameraIcon } alt="" /> } 
         {creatorsProfile?.profileIconImg ? <img className='w-[70px] h-[70px] rounded-full object-cover absolute left-1/2 top-full -translate-y-1/2 -translate-x-1/2' src={ creatorsProfile?.profileIconImg} alt="" /> : <img className="w-5" src={cameraIcon } alt="" /> }
         </div>
         {/* show follow button if it's not logged in user */}
@@ -134,6 +135,7 @@ const CreatorsProfileCard = ({
             {/* <div className="vl"></div> */}
             <div className="ga-8">
               {totalPosts !=0 ?  <Link to={`/posts/${creatorId}`} style={{ textDecoration: 'none' }}
+               onClick={() => dispatch(getUserPosts({creator: creatorId, page:0}))}
               >
                 <h4>{totalPosts}</h4>
 
@@ -144,6 +146,7 @@ const CreatorsProfileCard = ({
         </div>
         </div> 
     </div>
+    </div> 
   )
 }
 

@@ -28,25 +28,37 @@ export const updateCreatorFollowStatus = createAsyncThunk(
             console.log(error)   
         }
     }
-)
+);
+
 export const creatorProfileSlice = createSlice({
     name: 'creatorProfile',
     initialState,
     reducers:{},
     extraReducers(builder){
-        builder.addCase(getCreatorProfile.fulfilled, (state, action) => {
-           return {
-            ...state,
-            ...action?.payload
-           }
+        builder.addCase(getCreatorProfile.pending, (state, action) => {
+            console.log('loading')
+            
+            })
+        .addCase(getCreatorProfile.fulfilled, (state, action) => {
+            return {...state, ...action?.payload}
            
            })
-           .addCase(updateCreatorFollowStatus.fulfilled, (state, action) => {
-            return {
-                ...state, 
-                follower : action.payload.follower
-            }
+        .addCase(getCreatorProfile.rejected, (state, action) => {
+            console.log(action?.error)
+            
+            })   
+        .addCase(updateCreatorFollowStatus.pending, (state, action) => {
+            console.log('loading')
+            
+            })    
+        .addCase(updateCreatorFollowStatus.fulfilled, (state, action) => {
+            state.follower = action.payload.follower
+          
            })
+        .addCase(updateCreatorFollowStatus.rejected, (state, action) => {
+           console.log(action?.error)
+        
+            })      
     }
 })
 

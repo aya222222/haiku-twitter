@@ -20,8 +20,8 @@ const CommentFunctions = ({ showFuncs, postId, commentId }) => {
    
       <div class="flex justify-start gap-3 items-center"
            onClick={() => {
-            dispatch(deleteComment(postId, commentId))
-            console.log('comment id ' +  commentId)
+            dispatch(deleteComment({postId, commentId}))
+            console.log('comment id ' + JSON.stringify({postId, commentId}))
         }}
       >
         <FiTrash2 /> 

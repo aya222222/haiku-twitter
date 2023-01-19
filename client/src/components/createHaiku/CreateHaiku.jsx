@@ -67,7 +67,7 @@ const CreateHaiku = ({
      
      //edit post
      if(currentId){
-     dispatch(updatePost(currentId, {...postData, username, profileIconImg: existingProfile.profileIconImg }));
+     dispatch(updatePost( {currentId, postData:{...postData, username, profileIconImg: existingProfile.profileIconImg} }));
       navigate('/');
       
     
@@ -194,6 +194,8 @@ const CreateHaiku = ({
   
   
     const backToPreviousPage = () => {
+      //set currentId null to reset.
+      setCurrentId(null)
      //go back to previous page
       navigate(-1);
     } 
@@ -281,7 +283,7 @@ const CreateHaiku = ({
 {openAlertModal  && (
     <div className='fixed z-10 left-0 top-0 h-screen w-full overflow-auto bg-slate-600 bg-opacity-50 '>
       <div className="bg-bg-color  px-[15px] py-[25px] w-1/4 left-1/2 top-1/2 relative -translate-y-1/2 -translate-x-1/2 rounded-md">
-       <span className="fa-solid fa-xmark"  onClick={(e) => setOpenAlertModal(false) }></span>
+       <span className="fa-solid fa-xmark absolute right-[10px] top-[7px] z-10  cursor-pointer hover:text-slate-500"  onClick={(e) => setOpenAlertModal(false) }></span>
         <div className="flex flex-col items-center opacity-100 gap-4">
         <h4>Do you really want to {clear? `clear all?` : `leave without save it?`} </h4>
           <div className="flex gap-2.5">

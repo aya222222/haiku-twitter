@@ -19,6 +19,8 @@ const FollowList = ({
   setListOfFollowing,
   setListOfCreatorFollowers,
   setListOfCreatorFollowing,
+  tags,
+  setTags
 }) => {
   
 const {follower: followersList, following: followingList} = useSelector((state) => state.profile);
@@ -37,11 +39,14 @@ const {follower: followersOfCreator, following: followingOfCreator} = useSelecto
 
  return (
 
-<div className="w-[70%] flex flex-col">
+<div className="w-full flex flex-col justify-center items-center">
 <div className='lg:hidden flex w-full justify-center mt-5 mx-0
        pb-5
      '>
-      <LogoSearch />
+      <LogoSearch 
+        tags={tags}
+        setTags={setTags}
+      />
  </div> 
      <CreatorsProfileCard 
           listOfFollowers={listOfFollowers}
@@ -55,8 +60,8 @@ const {follower: followersOfCreator, following: followingOfCreator} = useSelecto
        />
 
 
-<div className="flex flex-col justify-start items-center gap-4 bg-bg-color 
-      my-5 mx-0 rounded-3xl w-full min-h-fit">
+<div className="w-[85%] md:w-full flex flex-col justify-start items-center gap-4 bg-bg-color 
+      my-5 mx-0 rounded-3xl min-h-fit">
 
     { ( listOfFollowers && followersList?.length)  &&
        followersList?.map(follower => {

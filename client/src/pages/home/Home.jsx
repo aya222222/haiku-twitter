@@ -87,7 +87,7 @@ console.log('user is ' +  useSelector((state) => JSON.stringify(state.profile)))
     <>
    <div >
     <div className="Home">
-    <ProfileSide 
+    <ProfileSide className=""
       openHaikuModal={openHaikuModal} 
       setOpenHaikuModal={setOpenHaikuModal}
       openProfileModal={openProfileModal}
@@ -166,7 +166,7 @@ console.log('user is ' +  useSelector((state) => JSON.stringify(state.profile)))
 
        />
 }
-<div className='phone:hidden block'>
+<div className='md:hidden'>
  <Menu />
 </div>
    </>

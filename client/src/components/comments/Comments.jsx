@@ -5,10 +5,11 @@ import { commentPost } from '../../features/posts/postsSlice'
 import './Comments.css'
 import Comment from '../comment/Comment';
 import CommentFunctions from '../commentFunctions/CommentFunctions';
+import { useEffect } from 'react';
 
 const Comments = ({ post }) => {
 
-    const [comments, setComments] = useState(post?.comments);
+ 
     const [ comment, setComment ] = useState('');
     const [clickedDots, setClickedDots] = useState(null);
     const user = JSON.parse(localStorage.getItem('profile'));
@@ -16,17 +17,18 @@ const Comments = ({ post }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const commentsRef = useRef();
-
     
     const commentorIconImg = useSelector((state) => state.profile.profileIconImg)   
-    const handleClick = async () => {
-      console.log('posts is in comment '  + JSON.stringify(post))
-       const finalComment = `${user.result.username || user.result.sub}: ${comment}`
+    
+   
+    const handleClick =  () => {
+      
+       const value = `${user.result.username || user.result.sub}: ${comment}`
       try {
-         console.log('post Id ' +  finalComment)
-         const newComments = await dispatch(commentPost(finalComment, commentorIconImg, post._id)).unwrap();
-          console.log('new comment' + newComments)
-         setComments(newComments);
+         console.log('post Id ' +  post._id)
+         dispatch(commentPost({value, commentorIconImg, id:post._id}));
+    
+        
          setComment('');
         
       } catch (error) {
@@ -38,14 +40,15 @@ const Comments = ({ post }) => {
        },100)
       
        
+       console.log('post is ' + JSON.stringify(post))
     }
-
+     
 
  
     return (
     <div className='flex flex-col  gap-4 p-5'>
         <div className='flex flex-col gap-4'>
-        {comments?.map((comment, index) => { return (
+        {post?.comments?.map((comment, index) => { return (
           <Comment 
             comment={comment}
             index={index}
