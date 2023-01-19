@@ -30,16 +30,16 @@ I implemented MongoDB for all database. And for image, I used cloudinary.
 User can post a haiku, and delete/update/comment/like it. 
 put gif image
 
-###Search by word, or tags
+### Search by word, or tags
 put gif image
 
-###Follow or unfollow other users
+### Follow or unfollow other users
 put gif image
 
-##Create profile
+### Create profile
 put gif image
 
-##Sign in/Sign out
+### Sign in/Sign out
 put gif image
 
 
