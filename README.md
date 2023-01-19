@@ -9,12 +9,19 @@ I implemented MongoDB for all database. And for image, I used cloudinary.
 [![My Skills](https://skillicons.dev/icons?i=html,css,tailwind,js,react,nodejs,express,mongodb,redux)](https://skillicons.dev)
 
 ・HTML
-・CSS, 
-・Javascript, 
-・React, 
-・Tailwind, 
-・Redux(Redux Toolkit), 
-・MongoDB,
+
+・CSS 
+
+・Javascript
+
+・React
+
+・Tailwind
+
+・Redux(Redux Toolkit)
+
+・MongoDB
+
 ・Node.js(Express)
 
 ## Features 
