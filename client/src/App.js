@@ -12,6 +12,7 @@ import {ErrorBoundary} from 'react-error-boundary'
 import { GoogleOAuthProvider} from '@react-oauth/google'
 import FollowList from './components/followAndPostsCards/FollowList';
 import CreateHaiku from './components/createHaiku/CreateHaiku';
+import EditProfileMobile from './components/editProfileMobile/EditProfileMobile';
 
 function ErrorHandler({error}) {
   return (
@@ -248,6 +249,11 @@ function App() {
           setOpenHaikuModal={setOpenHaikuModal}
 
        />} />
+
+       <Route path='/editProfile' exact element={<EditProfileMobile 
+
+       />} />
+       
        <Route path="/auth" exact element={ <Auth />  } /> 
     
      </Routes>

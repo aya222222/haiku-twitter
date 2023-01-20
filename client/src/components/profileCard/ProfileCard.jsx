@@ -9,6 +9,7 @@ import cameraIcon from '../../img/camera-icon.png'
 
 import { getUserPosts } from '../../features/posts/postsSlice';
 import { getCreatorProfile } from '../../features/creatorProfile/creatorProfileSlice'; 
+import EditProfileBtn from '../editProfileButton/EditProfileBtn';
 
 const ProfileCard = (
   {
@@ -57,7 +58,7 @@ const ProfileCard = (
            <img className="h-full w-full object-cover 
             border border-solid 
           border-slate-500"
-            src={ existingProfile?.profileBgImg  } alt="" /> 
+            src={ existingProfile?.profileBgImg } alt="" /> 
            : 
            <img className="w-24 text-center" src={cameraIcon } alt="" /> }
          </div>
@@ -77,28 +78,9 @@ const ProfileCard = (
         </div>
  
 
-        <div className='relative'>
-          <button className='rounded-2xl bg-border-color
-           text-bg-color px-[2.5%] py-[2%] mt-[2%]
-           border-none outline-none w-fit text-xs xl:text-sm
-           duration-200
-           cursor-pointer 
-           hover:text-white
-           hover:outline-1  hover:outline-solid hover:outline-slate-200
-           hover:bg-bg-color
-           absolute  right-2.5  top-1
-           text-center 
-
-           ' 
-          onClick={() => {
-             setOpenProfileModal(true); 
-             console.log(openProfileModal)
-            }}
-             >
-            edit
-            </button>
-        </div>
-     
+       <EditProfileBtn
+        setOpenProfileModal={setOpenProfileModal}
+       />
         <div className="mt-8 mb-[5%] gap-1 flex flex-col justify-center items-center">
             <h4>{username}</h4>
             <p>{existingProfile?.bio ? existingProfile?.bio: ''}</p>
