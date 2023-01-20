@@ -11,6 +11,7 @@ import { updateCreatorFollowStatus } from '../../features/creatorProfile/creator
 
 import FollowBtn from '../followBtn/FollowBtn'
 import cameraIcon from '../../img/camera-icon.png'
+import EditProfileBtn from '../editProfileButton/EditProfileBtn'
 
 const CreatorsProfileCard = ({ 
     setListOfFollowers, 
@@ -33,6 +34,7 @@ const CreatorsProfileCard = ({
     
     const { totalPosts } = useSelector((state) => state.posts); 
     
+    let windowSize = window.innerWidth;
     // const {creator} = useParams();
 
 
@@ -68,6 +70,11 @@ const CreatorsProfileCard = ({
            followingStatus = {followingStatus}
            />
       </div> 
+      }
+
+      {/* if userId is same as creatorId, show profile edit button */}
+      {(user && userId == creatorId && windowSize < 1024) && 
+        <EditProfileBtn/>
       }
             {/* <button className='button followBtn' 
                 onClick={() => {

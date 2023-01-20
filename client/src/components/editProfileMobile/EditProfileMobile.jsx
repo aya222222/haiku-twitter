@@ -1,20 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
+import {FaArrowLeft} from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import {AiFillPicture} from 'react-icons/ai';
 import { updateProfile, createProfile } from '../../features/profile/profileSlice';
-import profileImage from '../../img/profileImg.jpg';
-import cover from '../../img/cover.jpg';
-// import LeaveProfileModal from '../../components/leaveProfileModal/LeaveProfileModal'
-import DeleteAlertModal from '../../components/deleteAlertModal/DeleteAlertModal';
-import './EditProfile.css'
-import FileBase from 'react-file-base64';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const EditProfile = ({ 
-  setOpenProfileModal, openProfileModal,
-}) => {
+
+
+const EditProfileMobile = () => {
 
 const dispatch = useDispatch();
-
+const navigate = useNavigate();
 
 const [openAlertModal, setOpenAlertModal] = useState(false);
 const [editProfileFlag, setEditProfileFlag] =  useState(false);
@@ -31,13 +27,10 @@ const profileId = existingProfile._id ;
 console.log('profile id in edit is  ' + profileId)
 // const loggedInUser = useSelector((state) => state.profileReducer?.userId == userId );
 
-console.log('profile is '  + JSON.stringify(existingProfile))
 
 const loggedInUserName = user?.result?.username || user?.result?.given_name
 
-console.log('loggedInUserName ' + loggedInUserName)
-// const post = useSelector((state) => currentId ? state.postsReducer.find((post) => post._id === currentId) : null);
-console.log('username is ' + loggedInUserName)
+
 const [profileData, setProfileData] = useState({
    bio: '',
    profileBgImg: '',
@@ -45,10 +38,11 @@ const [profileData, setProfileData] = useState({
    username: loggedInUserName
 })
 
-// const [profileId, setProfileId] = useState(null);
+
 
 useEffect(() => {
   if(effectRan.current === false){
+
   if(profileId){
    
     console.log('existingprofile' + JSON.stringify(existingProfile));
@@ -62,6 +56,7 @@ useEffect(() => {
   } else{
     console.log('no profile')
   }
+
   return () => effectRan.current = true;
  
 }
@@ -78,57 +73,40 @@ const handleSubmit = async (e) => {
     
    console.log('edited!!' + profileId)
    }else{
+    //create profile
     console.log('createprofile dispatched')
     dispatch(createProfile(profileData));
    }
-   
-   setOpenProfileModal(false)
 
  }
 
 
-
-const clickOutSide = (e) => {
-if(e.target == e.currentTarget) {
-  checkTextExists();
-
- 
-}
-}
   //if haiku modal form is empty, 
-  let values = Object.values(profileData)
+  let values = Object.values(profileData);
   //delete username from values array because it always exists
   values.pop()
-  console.log('values' + values)
   let emptyValues = values.every((value) => value == '');
 
-//if you click close btn or outside of haiku modal
+//if you click backToHome btn
 const checkTextExists = () => {
 
   //if currentId doesn't exist and and form is not empty, open confirm modal
   if(!profileId){
  
-    if(!emptyValues){
-      setOpenAlertModal(true);
-      console.log('filled ')
-    }else{
-      console.log('not filled ')
-      setOpenProfileModal(false)
-    }
-  //   for(let key in profileData){
-    
-  //     if(profileData[key] != '') {
-  //        setOpenAlertModal(true);
-  //   }
-  // }
-   //if nothing is input, close modal
-  // if(emptyValues) setOpenProfileModal(false)
+   //if nothing is input, go back to previous page
+  if(emptyValues) {
+    navigate(-1)
+  }else{
+    //if it's not empty, open confirm modal
+    setOpenAlertModal(true);
+  }
+
   //if currentId exsits
 }else if(profileId) {
   //if post is not edited, close the haiku modal
   if(!editProfileFlag){
-
-    setOpenProfileModal(false);
+     
+    navigate(-1);
  
     // if post is edited, open confirm modal
   }else{
@@ -141,7 +119,7 @@ const checkTextExists = () => {
   const handleCloseModal = ()=>{
  
     setOpenAlertModal(false);
-    setOpenProfileModal(false);
+    navigate(-1)
 
   }  
 
@@ -150,9 +128,7 @@ const checkTextExists = () => {
     console.log('invoked')
     if(e.target.files && e.target.files[0]){
       let img = e.target.files[0];
-      console.log('image is ' + img)
-       console.log('target name is ' + e.target.name)
-       console.log('target is ' + e.target)
+
       //create filereader and convert img to url
       const reader = new FileReader();
       reader.readAsDataURL(img);
@@ -164,19 +140,22 @@ const checkTextExists = () => {
     }
   }
 
-  if(openProfileModal) return (
+  return (
     <>
-    <div className='fixed z-10 left-0 top-0 h-screen w-full overflow-auto bg-slate-600 bg-opacity-50 '  
+    {/* <div className='fixed z-10 left-0 top-0 h-screen w-full overflow-auto bg-slate-600 bg-opacity-50 '  
     onClick={
-      (e) => { clickOutSide(e) }}>
+      (e) => { clickOutSide(e) }}> */}
+      <div className="min-h-screen flex flex-col items-start gap-5 mt-5 mx-5">
+       <FaArrowLeft onClick={ checkTextExists } size={28}/>
+        {/* <span className="fa-solid fa-xmark absolute right-[15px] top-[10px] cursor-pointer text-white hover:text-slate-500"   
+        onClick={
+        (e)=>{ checkTextExists();}}></span> */}
+         
     <form
      method="post"
-     className="w-1/2 my-5 mx-auto rounded-3xl bg-bg-color overflow-x-clip
+     className="w-[85%] my-5 mx-auto rounded-3xl bg-bg-color overflow-x-clip
                      p-5 relative">
-    <span className="fa-solid fa-xmark absolute right-[15px] top-[10px] cursor-pointer text-white hover:text-slate-500"   
-       onClick={
-      (e)=>{ checkTextExists();}}></span>
-        <h1>Edit Profile</h1>
+    
       <div className="editProfileImg relative flex flex-col items-center justify-center">
       {/* profileImg profileBgImg */}
        <div className=" relative bg-card-color 
@@ -203,9 +182,7 @@ const checkTextExists = () => {
             type="file"
             onChange={(e) => 
             {
-           
               onImageChange(e, setProfileData);
-
               setEditProfileFlag(true)
           }}
             />
@@ -214,8 +191,7 @@ const checkTextExists = () => {
           // previewProfileBgImg
           <div className=" absolute w-full h-full top-0">
             <span className="fa-solid fa-xmark absolute right-[10px] top-[5px] z-10 hover:text-slate-500 cursor-pointer"  
-             onClick={(e) => {
-              
+             onClick={(e) => { 
               setProfileData({...profileData, profileBgImg:''});
               setEditProfileFlag(true)
           }
@@ -246,9 +222,7 @@ const checkTextExists = () => {
           
               onChange={(e) => 
               {
-             
                 onImageChange(e, setProfileData);
-  
                 setEditProfileFlag(true)
             }}
             />
@@ -314,12 +288,13 @@ const checkTextExists = () => {
         </div>
       </div>
    
-    </form>
+     </form>
     </div>
+    {/* </div> */}
     {openAlertModal  && (
       // Modal
        <div className=' fixed z-10 left-0 top-0 h-screen w-full overflow-auto bg-slate-600 bg-opacity-50'>
-       <div className="deleteAlertModalInner bg-bg-color pt-[10px] pr-[15px] pb-[25px] pl-[15px] w-[25%] top-1/2 left-1/2 relative
+       <div className="deleteAlertModalInner bg-bg-color pt-[10px] pr-[15px] pb-[25px] pl-[15px] w-[60%] top-1/2 left-1/2 relative
                          -translate-y-1/2 -translate-x-1/2 rounded-md ">
        <span className="fa-solid fa-xmark hover:text-slate-500 absolute right-[10px] top-[6px] "  onClick={(e) => setOpenAlertModal(false) }></span>
        {/* deleteAlertModalSection */}
@@ -361,4 +336,4 @@ const checkTextExists = () => {
   )
 }
 
-export default EditProfile
+export default EditProfileMobile

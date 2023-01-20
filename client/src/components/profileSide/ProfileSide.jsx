@@ -57,13 +57,13 @@ const ProfileSide = (
             openHaikuModal={openHaikuModal} 
             setOpenHaikuModal={setOpenHaikuModal}
           />
-          <div className='md:flex hidden'>
+          <div className='md:flex lg:hidden hidden'>
             <Menu />
           </div>
         </>
       ) :
        <>
-        <div className='md:flex hidden'>
+        <div className='md:flex lg:hidden hidden'>
             <Menu />
         </div>
         <h6 className='text-center'>Please sign in to create your haiku.</h6>

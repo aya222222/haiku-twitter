@@ -63,7 +63,7 @@ useEffect(() => {
   return (
     <div class="bg-bg-color border-t border-slate-500 flex z-10
     md:flex-col justify-around fixed w-full md:bottom md:justify-start
-    md:relative md:border-none lg:hidden
+    md:relative md:border-none
     bottom-0 gap-4 md:mt-4 md:ml-4 py-4">
       
       <div onClick={backToHome}  
