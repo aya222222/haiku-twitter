@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import './Posts.css'
 import Post from '../post/Post'
-import postsData from '../../data/postsData'
+
 import LikeList from '../../pages/likeList/LikeList'
 import { useSelector, useDispatch } from 'react-redux'
 
